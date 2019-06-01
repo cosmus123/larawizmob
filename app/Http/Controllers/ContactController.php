@@ -22,7 +22,7 @@ class ContactController extends Controller
     		'name' => 'required',
     		'email' => 'required',
     		'website' => 'required',
-    		'message' => 'required'
+    		'description' => 'required'
 
     	]);
 
@@ -36,7 +36,7 @@ class ContactController extends Controller
     	$contact->name = request('name');
     	$contact->email = request('email');
     	$contact->website = request('website');
-    	$contact->description = request('message');
+    	$contact->description = request('description');
 
     	$contact->save();
 

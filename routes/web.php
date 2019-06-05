@@ -21,3 +21,8 @@ Route::get('/download', 'DefaultController@download');
 
 Route::post('/contact', 'ContactController@store');
 
+Route::post('/subscribe_first', 'SubscribeController@send_first');
+
+Route::post('/subscribe_second', 'SubscribeController@send_second');
+
+

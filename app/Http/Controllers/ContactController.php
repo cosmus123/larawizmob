@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\User;
+
 use App\Mail\WelcomeContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -15,9 +16,9 @@ class ContactController extends Controller
 
 
 
-    	//Validate the fields
+    	//Validate the input fields
 
-    	$this->validate(request(),[
+    	$this->validate($request,[
 
     		'name' => 'required',
     		'email' => 'required',
@@ -25,6 +26,23 @@ class ContactController extends Controller
     		'description' => 'required'
 
     	]);
+
+
+         //Send email
+
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'website' => $request->website,
+            'description' => $request->description
+        );
+
+        Mail::send('mail.contact', $data, function ($message) use ($data) {
+            $message->from($data['email']);
+            $message->to('cosminmus@productsandservices.eu.com');
+            $message->subject($data['description']);
+
+        });
 
     	//Create a post using request data
     	//Save the data to the database
@@ -40,16 +58,8 @@ class ContactController extends Controller
 
     	$contact->save();
 
-        // $user = User::create(
-        //        request(['name'],['email'],['website'],['description']) 
-        // );
-
-        //  Mail::to($request->user())->send(new WelcomeContact);
-
-        $mail = 'cosminmus@productsandservices.eu.com';
-        Mail::to($mail)->send(new WelcomeContact);
-
-
+       
+        //Update with flash message
     	$request->session()->flash('success', 'Form has been submitted to MySQL database and via Email !');
     	
         return redirect('/');

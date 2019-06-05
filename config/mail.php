@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'mail.productsandservices.eu.com'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('cosminmus@productsandservices.eu.com'),
+    'username' => env('MAIL_USERNAME'),
 
-    'password' => env('Bxg*7!V9A34pNz'),
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
